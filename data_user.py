@@ -39,3 +39,18 @@ class User:
         "login": "Andre",
         "password": ""
     }
+
+class Order:
+    data_user_order = {
+        "firstName": "Andre",
+        "lastName": "Ali",
+        "address": "Minsk, Lomonosov str.",
+        "metroStation": 1,
+        "phone": "+375 25 135 79 01",
+        "rentTime": 3,
+        "deliveryDate": "2025-01-27",
+        "comment": "I need more ...",
+        "color": [
+            "BLACK"
+        ]
+    }

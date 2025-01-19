@@ -15,11 +15,13 @@ class TestLoginCourier:
 
         assert response.status_code == 200 and 'id' in response.text
 
+
     @allure.title('Аутентификация с несуществующей парой логин-пароль')
     def test_not_reg_user(self):
         response = requests.post(f'{Constants.BASE_URL}{Endpoint.LOGIN_COURIER}', data=User.not_reg_user)
 
         assert response.status_code == 404 and 'Учетная запись не найдена' in response.text
+
 
     @pytest.mark.parametrize('auth_without_login_or_password', [User.auth_without_login, User.auth_without_password])
     @allure.title('Аутентификация без логина или пароля')
