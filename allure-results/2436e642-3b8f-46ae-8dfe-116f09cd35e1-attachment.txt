@@ -1,0 +1,1 @@
+Запрос: {'login': 'donaldsoneduardo', 'password': 's92M+*5d_&', 'name': 'Michael Bryant'}
