@@ -4,13 +4,13 @@ import allure
 from endpoints import Endpoint
 from constants import Constants
 
-from data_user import registration_new_courier as new
-from data_user import registration_new_courier_without_login as new_without_login
-from data_user import registration_new_courier_without_login as new_without_password
+from data_user import registration_new_courier as new_reg
+from data_user import registration_new_courier_without_login as new_reg_without_login
+from data_user import registration_new_courier_without_login as new_reg_without_password
 
 
 class TestCreateCourier:
-    data = new()
+    data = new_reg()
 
     @allure.title('Создание курьера, запрос возвращает правильный код ответа, успешный запрос возвращает {"ok":true}')
     def test_create_courier(self):
@@ -21,7 +21,7 @@ class TestCreateCourier:
 
 
     @allure.title('Запрос создания двух одинаковых курьеров, если создать пользователя с логином, который уже есть, возвращается ошибка')
-    def test_courier_was_created(self):
+    def test_create_courier_duplicate(self):
         response = requests.post(f'{Constants.BASE_URL}{Endpoint.CREATE_COURIER}', TestCreateCourier.data)
 
         assert response.status_code == 409 and 'Этот логин уже используется' in response.text
@@ -29,13 +29,13 @@ class TestCreateCourier:
 
     @allure.title('Запрос создания курьера без логина, если поля нет, запрос возвращает ошибку')
     def test_create_courier_without_login(self):
-        response = requests.post(f'{Constants.BASE_URL}{Endpoint.CREATE_COURIER}', new_without_login())
+        response = requests.post(f'{Constants.BASE_URL}{Endpoint.CREATE_COURIER}', new_reg_without_login())
 
         assert response.status_code == 400 and 'Недостаточно данных для создания учетной записи' in response.text
 
 
     @allure.title('Запрос создания курьера без пароля, если поля нет, запрос возвращает ошибку')
     def test_create_courier_without_password(self):
-        response = requests.post(f'{Constants.BASE_URL}{Endpoint.CREATE_COURIER}', new_without_password())
+        response = requests.post(f'{Constants.BASE_URL}{Endpoint.CREATE_COURIER}', new_reg_without_password())
 
         assert response.status_code == 400 and 'Недостаточно данных для создания учетной записи' in response.text
